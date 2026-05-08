@@ -2,12 +2,15 @@
 #include "MainMenu.h"
 #include "GamePanel.h"
 #include "GameOver.h"
+#include "LeaderboardPanel.h"
 
 Framework::Framework(const wxString& title, const wxPoint& pos, const wxSize& size)
 	: wxFrame(nullptr, wxID_ANY, title, pos, size), currentpanel(nullptr) {
 
 	SetMinSize(size);
 	SetMaxSize(size);
+
+	myleaderboard.Load();
 
 	sizer = new wxBoxSizer(wxVERTICAL);
 	SetSizer(sizer);
@@ -55,3 +58,11 @@ void Framework::show_gameover(int score, int difficulty) {
 	currentpanel = gameover;
 }
 
+void Framework::ShowLeaderboard() {
+	if (currentpanel) { currentpanel->Destroy(); currentpanel = nullptr; }
+
+	LeaderboardPanel* panel = new LeaderboardPanel(this, myleaderboard);
+	sizer->Add(panel, 1, wxEXPAND);
+	sizer->Layout();
+	currentpanel = panel;
+}

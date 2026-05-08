@@ -30,6 +30,8 @@ MainMenu::MainMenu(Framework* parent) : wxPanel(parent, wxID_ANY), myframe(paren
 	wxButton* mediumbutton = MakeButton("MEDIUM", *wxWHITE, wxID_HIGHEST + 2);
 	wxButton* hardbutton = MakeButton("HARD", *wxWHITE, wxID_HIGHEST + 3);
 	wxButton* insanebutton = MakeButton("INSANE", *wxWHITE, wxID_HIGHEST + 4);
+	wxButton* leaderboardbtn = MakeButton("LEADERBOARD", wxColour(255, 215, 0), wxID_HIGHEST + 5);
+
 
 
 	mylayout->AddStretchSpacer(2);
@@ -39,6 +41,7 @@ MainMenu::MainMenu(Framework* parent) : wxPanel(parent, wxID_ANY), myframe(paren
 	mylayout->Add(mediumbutton, 0, wxALIGN_CENTER | wxBOTTOM, 12);
 	mylayout->Add(hardbutton, 0, wxALIGN_CENTER | wxBOTTOM, 12);
 	mylayout->Add(insanebutton, 0, wxALIGN_CENTER | wxBOTTOM, 12);
+	mylayout->Add(leaderboardbtn, 0, wxALIGN_CENTER | wxBOTTOM, 12);
 	mylayout->AddStretchSpacer(3);
 
 	
@@ -48,12 +51,14 @@ MainMenu::MainMenu(Framework* parent) : wxPanel(parent, wxID_ANY), myframe(paren
 	mediumbutton->Bind(wxEVT_BUTTON, &MainMenu::MediumSelect, this);
 	hardbutton->Bind(wxEVT_BUTTON, &MainMenu::HardSelect, this);
 	insanebutton->Bind(wxEVT_BUTTON, &MainMenu::InsaneSelect, this);
+	leaderboardbtn->Bind(wxEVT_BUTTON, &MainMenu::LeaderboardSelect, this);
 }
 
 void MainMenu::EasySelect(wxCommandEvent&) { StartGame(Difficulty::easy); };
 void MainMenu::MediumSelect(wxCommandEvent&) { StartGame(Difficulty::medium); };
 void MainMenu::HardSelect(wxCommandEvent&) { StartGame(Difficulty::hard); };
 void MainMenu::InsaneSelect(wxCommandEvent&) { StartGame(Difficulty::insane); };
+void MainMenu::LeaderboardSelect(wxCommandEvent&) { myframe->ShowLeaderboard(); };
 
 void MainMenu::StartGame(Difficulty d) {
 	myframe->show_game(DifficultyConfig::Make(d));

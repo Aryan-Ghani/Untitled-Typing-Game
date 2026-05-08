@@ -1,0 +1,3 @@
+Inward,0,Easy
+Inward,0,Easy
+Inward,0,Insane

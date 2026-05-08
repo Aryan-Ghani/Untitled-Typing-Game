@@ -3,7 +3,7 @@
 #include "WordList.h"
 
 //add file handling
-//think about virtual functions
+//think about pure virtual
 
 enum class PowerUpType {
     None,

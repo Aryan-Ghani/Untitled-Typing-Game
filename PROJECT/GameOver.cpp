@@ -6,6 +6,7 @@ GameOver::GameOver(Framework* parent, int score, int difficulty) : wxPanel(paren
 
 	wxString diffLabels[] = { "EASY", "MEDIUM", "HARD", "INSANE" };
 	wxString difflabel = diffLabels[difficulty];
+	mydifficulty = difficulty;
 
 	wxBoxSizer* root = new wxBoxSizer(wxVERTICAL);
 
@@ -21,7 +22,16 @@ GameOver::GameOver(Framework* parent, int score, int difficulty) : wxPanel(paren
 	scoretxt->SetForegroundColour(*wxWHITE);
 	scoretxt->SetFont(wxFont(24, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 
-	wxButton* returnBtn = new wxButton(this, wxID_ANY, "RETURN TO MENU", wxDefaultPosition, wxSize(220, 48));
+	wxStaticText* nameLbl = new wxStaticText(this, wxID_ANY, "Enter your name:");
+	nameLbl->SetForegroundColour(wxColour(160, 160, 160));
+	nameLbl->SetFont(wxFont(12, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+
+	mynameCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(220, 32));
+	mynameCtrl->SetMaxLength(16);
+	mynameCtrl->SetFont(wxFont(13, wxFONTFAMILY_TELETYPE,
+		wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+
+	wxButton* returnBtn = new wxButton(this, wxID_ANY, "SAVE AND RETURN TO MENU", wxDefaultPosition, wxSize(300, 48));
 	returnBtn->SetBackgroundColour(*wxBLACK);
 	returnBtn->SetForegroundColour(*wxWHITE);
 	returnBtn->SetFont(wxFont(14, wxFONTFAMILY_TELETYPE,
@@ -31,6 +41,8 @@ GameOver::GameOver(Framework* parent, int score, int difficulty) : wxPanel(paren
 	root->Add(overtxt, 0, wxALIGN_CENTER | wxBottom, 10);
 	root->Add(difftxt, 0, wxALIGN_CENTER | wxBottom, 6);
 	root->Add(scoretxt, 0, wxALIGN_CENTER | wxBottom, 30);
+	root->Add(nameLbl, 0, wxALIGN_CENTER | wxBottom, 6);
+	root->Add(mynameCtrl, 0, wxALIGN_CENTER | wxBottom, 16);
 	root->Add(returnBtn, 0, wxALIGN_CENTER | wxBottom, 12);
 	root->AddStretchSpacer(3);
 
@@ -40,5 +52,13 @@ GameOver::GameOver(Framework* parent, int score, int difficulty) : wxPanel(paren
 }
 
 void GameOver::OnReturnClick(wxCommandEvent&) {
+	wxString name = mynameCtrl->GetValue().Trim();
+	const wxString diffLabels[] = { "Easy", "Medium", "Hard", "Insane" };
+
+	myframe->GetLeaderboard().AddEntry(
+		name.IsEmpty() ? "Anonymous" : name,
+		myscore,
+		diffLabels[mydifficulty]
+	);
 	myframe->show_menu();
 }

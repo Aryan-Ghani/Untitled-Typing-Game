@@ -14,6 +14,7 @@ private:
 	void MediumSelect(wxCommandEvent&);
 	void HardSelect(wxCommandEvent&);
 	void InsaneSelect(wxCommandEvent&);
+	void LeaderboardSelect(wxCommandEvent&);
 
 	void StartGame(Difficulty diff);
 
