@@ -1,9 +1,11 @@
 #include "GameOver.h"
 #include "Framework.h"
 
+int scores = 0;
+
 GameOver::GameOver(Framework* parent, int score, int difficulty) : wxPanel(parent, wxID_ANY), myframe(parent) {
 	SetBackgroundColour(*wxBLACK);
-
+	scores = score;
 	wxString diffLabels[] = { "EASY", "MEDIUM", "HARD", "INSANE" };
 	wxString difflabel = diffLabels[difficulty];
 	mydifficulty = difficulty;
@@ -57,7 +59,7 @@ void GameOver::OnReturnClick(wxCommandEvent&) {
 
 	myframe->GetLeaderboard().AddEntry(
 		name.IsEmpty() ? "Anonymous" : name,
-		myscore,
+		scores,
 		diffLabels[mydifficulty]
 	);
 	myframe->show_menu();

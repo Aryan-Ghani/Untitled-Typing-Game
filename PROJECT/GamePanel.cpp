@@ -325,7 +325,7 @@ void GamePanel::Draw(wxDC& dc) {
 
 		if (a.haspowerup())
 		{
-			dc.SetFont(wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+			dc.SetFont(wxFont(12, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 			dc.SetTextForeground(rockColour);
 			wxString label;
 			switch (a.powerup) {
