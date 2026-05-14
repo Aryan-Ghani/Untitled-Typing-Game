@@ -144,6 +144,9 @@ void GamePanel::CheckCollisions() {
 			{
 				gameover = true;
 				gametimer.Stop();
+				int gamediff;
+				myframe->show_gameover(myplayer.score, int(myconfig.difficulty));
+				return;
 			}
 		}
 		else

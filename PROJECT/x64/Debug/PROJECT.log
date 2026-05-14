@@ -1,2 +1,3 @@
 ﻿  GamePanel.cpp
+D:\source\PROJECT\PROJECT\GamePanel.cpp(147,9): warning C4101: 'gamediff': unreferenced local variable
   PROJECT.vcxproj -> D:\source\PROJECT\x64\Debug\PROJECT.exe
